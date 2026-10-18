@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codeverify"
+version = "0.1.0"
+description = "Verify AI-generated code in pull requests with a tree-sitter AST pass and a Claude review."
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic",
+    "tree-sitter",
+    "tree-sitter-language-pack",
+    "pydantic>=2",
+    "click>=8",
+    "PyGithub>=2",
+    "pyyaml",
+]
+
+[project.scripts]
+codeverify = "codeverify.__main__:cli"
+
+[tool.setuptools.packages.find]
+include = ["codeverify*"]
+
+[tool.setuptools.package-data]
+codeverify = ["prompts/*.txt"]
