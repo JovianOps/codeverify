@@ -5,18 +5,24 @@ Verify AI-generated code in pull requests with a tree-sitter AST pass and a Clau
 ## Install
 
 ```bash
-pip install -e .
+pip install git+https://github.com/JovianOps/codeverify.git
 ```
 
 ## Usage
 
 ```bash
-# Analyze a diff from stdin
+# Analyze a PR diff
 codeverify diff --repo owner/name --pr 42
 
-# Post findings to a PR
-codeverify post --repo owner/name --pr 42
+# Fetch a PR, analyze it, and post review
+codeverify pr --repo owner/name --pr 42
 ```
+
+## Commands
+
+- `diff` — Analyze a diff file (`-` for stdin) or git ref
+- `pr` — Fetch a pull request's diff, analyze it, and post findings
+- `post` — Post a pre-computed result as a PR review (needs `GITHUB_TOKEN`)
 
 ## Architecture
 
@@ -29,7 +35,7 @@ codeverify post --repo owner/name --pr 42
 ## Environment
 
 ```
-CODEVERIFY_GITHUB_TOKEN=ghp_xxx    # GitHub token
+CODEVERIFY_GITHUB_TOKEN=ghp_xxx    # GitHub token (for PR posting)
 ANTHROPIC_API_KEY=sk-ant-xxx       # Anthropic API key
 ```
 
